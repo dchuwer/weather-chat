@@ -17,24 +17,23 @@ class Controller {
 
         /* Start a new City Post **/
         $('.searchButton').on('click', function(){    
-            var post = new Controller();     
-            console.log(post)   
-            post.data.city = $('#inputCity').val();  
+                   
+            controller.data.city = $('#inputCity').val();  
             
             /* Search API using AJAX **/
-            var ajaxCall  = post.data.getWeather(post);
+            var ajaxCall  = controller.data.getWeather();
             ajaxCall.then(function(data) {
                   
                 
                 var id= Date.now();
-                post.data.city = data.location.name;
-                post.data.temp = data.current.temp_c;
-                post.data.weather = data.current.condition.text;
-                post.data.id = id;
-                var arrPosts = post.data.getFromLocalStorage();
-                arrPosts.push(post.data)
-                post.data.saveToLocalStorage(arrPosts);
-                post.view.render(post.data);
+                controller.data.city = data.location.name;
+                controller.data.temp = data.current.temp_c;
+                controller.data.weather = data.current.condition.text;
+                controller.data.id = id;
+                var arrPosts = controller.data.getFromLocalStorage();
+                arrPosts.push(controller.data)
+                controller.data.saveToLocalStorage(arrPosts);
+                controller.view.render(controller.data);
             });
 
             // ajaxCall.error(function(jqXHR, textStatus, errorThrown) {
@@ -47,21 +46,20 @@ class Controller {
         /* Start a New Comment */
         $('.results').on('click','.commentButton', function(){
     
-            var post = new Controller(); 
+            
             var inputComment = $(this).parent().find('#inputComment').val();
             var id = $(this).closest('.result').data().id
-            var posts = post.data.getFromLocalStorage();
-            var index = post.data.findPostById(posts,id);
+            var posts = controller.data.getFromLocalStorage();
+            var index = controller.data.findPostById(posts,id);
             
             var comment1 = posts[index]
             var newObjComm = {text : inputComment};
-            console.log(posts)
             comment1.comment.push(newObjComm)
            
             
-            post.data.saveToLocalStorage(posts);
+            controller.data.saveToLocalStorage(posts);
     
-            post.view.renderComments(posts);
+            controller.view.renderComments(posts);
         
         
             
@@ -69,13 +67,12 @@ class Controller {
     
         /* Delete a Post */
         $('.results').on('click','.trash', function(){
-            var post = new Controller;
             var id = $(this).closest('.result').data().id
-            var resmem = post.data.getFromLocalStorage();
-            let index = post.data.findPostById(resmem,id)
+            var resmem = controller.data.getFromLocalStorage();
+            let index = controller.data.findPostById(resmem,id)
             resmem.splice(index,1);
-            post.data.saveToLocalStorage(resmem);
-            post.view.renderComments(resmem);
+            controller.data.saveToLocalStorage(resmem);
+            controller.view.renderComments(resmem);
        
         });
     
@@ -87,6 +84,8 @@ class Controller {
 
 
     var controller = new Controller();
+    var arrPosts = controller.data.getFromLocalStorage();
+    controller.view.renderComments(arrPosts)
     controller.initApplication();
 
 

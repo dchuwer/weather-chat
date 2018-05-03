@@ -25,7 +25,7 @@ class Data {
 
     }
 
-    getWeather(post){
+    getWeather(){
         return $.ajax({
             method: "GET",
             url: 'http://api.apixu.com/v1/current.json?key=829b2ee50c3d4705a58122238180205&q='+this.city})
