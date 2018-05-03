@@ -1,0 +1,16 @@
+.container{
+
+    padding: 5%;
+}
+.result{
+    border: 2px solid purple;
+    margin-bottom: 2%;
+}
+
+.comment-list{
+    padding : 1%;
+}
+
+.trash{
+    padding-left: 55%;
+}

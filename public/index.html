@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="jquery/dist/jquery.js"></script>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    
+    <script src="Controller.js" type="module"></script>
+    
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <h1>  Weather Chat </h1>
+        </div>
+
+        <form class="form-inline">
+            
+            <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" id="inputCity" placeholder="Enter with the City">
+            </div>
+            <button type="button" class="btn btn-primary searchButton">Search</button>
+        </form>
+
+    </div>
+
+    <div class="PostWeather col-xs-12 col-md-8"></div>
+    
+    <div class="results">
+
+            <div class="posts">  </div>
+            <script id="searchResult" type="text/x-handlebars-template">
+            
+            <div class="result" data-id= "{{ id }}">
+                
+                    <h1> {{ city }}   <i class="fa fa-trash trash"></i> </h1>
+                    
+                    <p>Temperature: {{ temp }} Celcius  </p>
+                    
+                    <p>Condition: {{ weather }} </p>
+                    
+                    {{#each comment}}
+                        <div class='parag' data-id= "{{@index}}" > 
+                            
+                            <span> {{ text }}</span>     
+                        </div>
+                    {{/each}}
+                    <form class="form-inline">
+                
+                            <div class="form-comment mx-sm-3 mb-2">
+                            <input type="text" class="form-control" size="80" id="inputComment" placeholder="Comment About the weather in {{ city }}"><button type="button" class="btn btn-success commentButton">Comment</button>
+                            
+                            </div>
+                            
+                    </form>
+                
+            </div>  
+             
+                      
+                              
+               
+            </script>
+    </div>
+        
+
+
+    
+
+          
+        
+        
+     
+</body>
+
+<script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
+</html>
