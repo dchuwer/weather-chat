@@ -1,10 +1,19 @@
-.container{
+.body {
+   background-color: rgba(187, 235, 241, 0.952)
+}
 
-    padding: 5%;
+.container{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    
 }
 .result{
     border: 2px solid purple;
+    margin-left: 15%;
     margin-bottom: 2%;
+    padding: 5%;
+    width: 60%;
 }
 
 .comment-list{
@@ -12,5 +21,10 @@
 }
 
 .trash{
-    padding-left: 55%;
+    float: right;
+}
+
+.dropdown{
+   margin-left:5%;
+   display: none;
 }

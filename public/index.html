@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+    
     <script type="text/javascript" src="jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="popper.js/dist/umd/popper.js"></script>
+    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
+    
     
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     
@@ -17,7 +21,7 @@
 </head>
 <body>
     
-    <div class="container">
+    <div class="container" >
         <div class="header">
             <h1>  Weather Chat </h1>
         </div>
@@ -28,9 +32,23 @@
             <input type="text" class="form-control" id="inputCity" placeholder="Enter with the City">
             </div>
             <button type="button" class="btn btn-primary searchButton">Search</button>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button class="dropdown-item" id='alphaButton' type="button">Alphabetic</button>
+                  <button class="dropdown-item" id="tempButton" type="button">Temperature</button>
+                  
+                </div>
+              </div>
+
         </form>
+        
 
     </div>
+
+    
 
     <div class="PostWeather col-xs-12 col-md-8"></div>
     
@@ -56,7 +74,7 @@
                     <form class="form-inline">
                 
                             <div class="form-comment mx-sm-3 mb-2">
-                            <input type="text" class="form-control" size="80" id="inputComment" placeholder="Comment About the weather in {{ city }}"><button type="button" class="btn btn-success commentButton">Comment</button>
+                            <input type="text" class="form-control" size="50" id="inputComment" placeholder="Comment About the weather in {{ city }}"><button type="button" class="btn btn-success commentButton">Comment</button>
                             
                             </div>
                             

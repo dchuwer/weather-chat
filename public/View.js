@@ -18,6 +18,7 @@ class View {
 
     renderComments(posts){
         $('.posts').empty();
+        $('.dropdown').css({display: "block"});
         for (let i=0; i<posts.length; i++){
     
             var source = $('#searchResult').html();

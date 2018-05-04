@@ -16,10 +16,10 @@ class Controller {
     initApplication(){
 
         /* Start a new City Post **/
-        $('.searchButton').on('click', function(){    
-                   
-            controller.data.city = $('#inputCity').val();  
+        $('.searchButton').on('click', function(){  
             
+            controller.data.city = $('#inputCity').val();  
+            $('#inputCity').val('')
             /* Search API using AJAX **/
             var ajaxCall  = controller.data.getWeather();
             ajaxCall.then(function(data) {
@@ -40,14 +40,16 @@ class Controller {
             //     console.log(textStatus);
             // });
 
+            
            
         })
 
         /* Start a New Comment */
         $('.results').on('click','.commentButton', function(){
-    
+            
             
             var inputComment = $(this).parent().find('#inputComment').val();
+            $(this).parent().find('#inputComment').val('')
             var id = $(this).closest('.result').data().id
             var posts = controller.data.getFromLocalStorage();
             var index = controller.data.findPostById(posts,id);
@@ -75,6 +77,25 @@ class Controller {
             controller.view.renderComments(resmem);
        
         });
+
+
+        $('.container').on('click','#alphaButton', function(){
+            var resmem = controller.data.getFromLocalStorage();
+            
+            controller.data.sortPosts(resmem,"city");
+            controller.data.saveToLocalStorage(resmem);
+            controller.view.renderComments(resmem);
+       
+        });
+
+        $('.container').on('click','#tempButton', function(){
+            var resmem = controller.data.getFromLocalStorage();
+            
+            controller.data.sortPosts(resmem,"temp");
+            controller.data.saveToLocalStorage(resmem);
+            controller.view.renderComments(resmem);
+       
+        });
     
 
     }
@@ -86,6 +107,12 @@ class Controller {
     var controller = new Controller();
     var arrPosts = controller.data.getFromLocalStorage();
     controller.view.renderComments(arrPosts)
+    
+    // $("input").keypress(function(event) {
+    //     if (event.keyCode === 13) {
+    //         $(".buttonSearch").click();
+    //     }
+    // });
     controller.initApplication();
 
 
