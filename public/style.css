@@ -1,5 +1,5 @@
 .body {
-   background-color: rgba(187, 235, 241, 0.952)
+   background-color: rgba(162, 237, 247, 0.952)
 }
 
 .container{
@@ -10,6 +10,7 @@
 }
 .result{
     border: 2px solid purple;
+    border-bottom-style: outset;
     margin-left: 15%;
     margin-bottom: 2%;
     padding: 5%;
@@ -27,4 +28,17 @@
 .dropdown{
    margin-left:5%;
    display: none;
+}
+
+.comments{
+    border: 1px solid rgb(128, 119, 0);
+    border-bottom-style: outset;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    padding: 5%;
+    width: 90%;
+}
+
+.comments input {
+    margin-top: 3%;
 }

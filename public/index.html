@@ -64,21 +64,22 @@
                     <p>Temperature: {{ temp }} Celcius  </p>
                     
                     <p>Condition: {{ weather }} </p>
-                    
-                    {{#each comment}}
-                        <div class='parag' data-id= "{{@index}}" > 
-                            
-                            <span> {{ text }}</span>     
-                        </div>
-                    {{/each}}
-                    <form class="form-inline">
-                
-                            <div class="form-comment mx-sm-3 mb-2">
-                            <input type="text" class="form-control" size="50" id="inputComment" placeholder="Comment About the weather in {{ city }}"><button type="button" class="btn btn-success commentButton">Comment</button>
-                            
+                    <div class="comments">
+                        {{#each comment}}
+                            <div class='parag' data-id= "{{@index}}" > 
+                                
+                                <span> {{ text }}</span>     
                             </div>
-                            
-                    </form>
+                        {{/each}}
+                        <form class="form-inline">
+                    
+                                <div class="form-comment mx-sm-3 mb-2">
+                                <input type="text" class="form-control" size="50" id="inputComment" placeholder="Comment About the weather in {{ city }}"><button type="button" class="btn btn-success commentButton">Comment</button>
+                                
+                                </div>
+                                
+                        </form>
+                    </div>
                 
             </div>  
              
@@ -98,5 +99,5 @@
      
 </body>
 
-<script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
+
 </html>
