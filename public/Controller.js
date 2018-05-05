@@ -22,20 +22,13 @@ class Controller {
             $('#inputCity').val('')
             /* Search API using AJAX **/
             var ajaxCall  = controller.data.getWeather();
-            ajaxCall.then(function(data) {
-                  
-                
-                var id= Date.now();
-                controller.data.city = data.location.name;
-                controller.data.temp = data.current.temp_c;
-                controller.data.weather = data.current.condition.text;
-                controller.data.id = id;
-                var arrPosts = controller.data.getFromLocalStorage();
-                arrPosts.push(controller.data)
-                controller.data.saveToLocalStorage(arrPosts);
-                controller.view.render(controller.data);
-            });
 
+            ajaxCall.then(function (data) {
+                controller.data.createPost(data);
+                controller.view.render(controller.data);
+            })
+           
+           
             // ajaxCall.error(function(jqXHR, textStatus, errorThrown) {
             //     console.log(textStatus);
             // });
@@ -51,16 +44,7 @@ class Controller {
             var inputComment = $(this).parent().find('#inputComment').val();
             $(this).parent().find('#inputComment').val('')
             var id = $(this).closest('.result').data().id
-            var posts = controller.data.getFromLocalStorage();
-            var index = controller.data.findPostById(posts,id);
-            
-            var comment1 = posts[index]
-            var newObjComm = {text : inputComment};
-            comment1.comment.push(newObjComm)
-           
-            
-            controller.data.saveToLocalStorage(posts);
-    
+            var posts = controller.data.addComment(inputComment,id)
             controller.view.renderComments(posts);
         
         
@@ -69,17 +53,14 @@ class Controller {
     
         /* Delete a Post */
         $('.results').on('click','.trash', function(){
-            var id = $(this).closest('.result').data().id
-            var resmem = controller.data.getFromLocalStorage();
-            let index = controller.data.findPostById(resmem,id)
-            resmem.splice(index,1);
-            controller.data.saveToLocalStorage(resmem);
-            controller.view.renderComments(resmem);
+            var id = $(this).closest('.result').data().id        
+            var delpost = controller.data.delPost(id);
+            controller.view.renderComments(delpost);
        
         });
 
-
-        $('.container').on('click','#alphaButton', function(){
+        /* Sort By City */
+        $('.container').on('click','#cityButton', function(){
             var resmem = controller.data.getFromLocalStorage();
             
             controller.data.sortPosts(resmem,"city");
@@ -88,15 +69,26 @@ class Controller {
        
         });
 
+        /* Sort By Temperature */
         $('.container').on('click','#tempButton', function(){
             var resmem = controller.data.getFromLocalStorage();
             
-            controller.data.sortPosts(resmem,"temp");
+            controller.data.sortPosts(resmem,"temp_c");
             controller.data.saveToLocalStorage(resmem);
             controller.view.renderComments(resmem);
        
         });
     
+        /* Sort By Date */
+        $('.container').on('click','#tempButton', function(){
+            var resmem = controller.data.getFromLocalStorage();
+            
+            controller.data.sortPosts(resmem,"last_updated");
+            controller.data.saveToLocalStorage(resmem);
+            controller.view.renderComments(resmem);
+       
+        });
+        
 
     }
 }

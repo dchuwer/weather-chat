@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Weather Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
     
@@ -14,7 +15,7 @@
     <script type="text/javascript" src="handlebars/dist/handlebars.js"></script>
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    
     
     <script src="Controller.js" type="module"></script>
     
@@ -37,9 +38,9 @@
                   Sort
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" id='alphaButton' type="button">Alphabetic</button>
+                  <button class="dropdown-item" id='cityButton' type="button">City</button>
+                  <button class="dropdown-item" id="dateButton" type="button">Date</button>
                   <button class="dropdown-item" id="tempButton" type="button">Temperature</button>
-                  
                 </div>
               </div>
 
@@ -60,10 +61,12 @@
             <div class="result" data-id= "{{ id }}">
                 
                     <h1> {{ city }}   <i class="fa fa-trash trash"></i> </h1>
+
+                    <p>Last Update: {{ last_updated }}</p>
                     
-                    <p>Temperature: {{ temp }} Celcius  </p>
+                    <p>Temperature: {{ temp_c }}º Celcius  // {{ temp_f }}º Fahrenheit</p>
                     
-                    <p>Condition: {{ weather }} </p>
+                    <p>Condition: {{ weather }} <img src='{{ icon }}'>' </p>
                     <div class="comments">
                         {{#each comment}}
                             <div class='parag' data-id= "{{@index}}" > 
