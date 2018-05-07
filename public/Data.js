@@ -59,6 +59,21 @@ class Data {
 
 
     }
+
+    updateWeather(newarr){
+
+        this.arrPosts.map( (a,index) => { 
+           a.temp_c = newarr[index].temp_c;
+           a.temp_f = newarr[index].temp_f;
+           a.weather = newarr[index].weather;
+           a.icon = newarr[index].icon;
+           a.last_updated = newarr[index].last_updated;
+        })
+
+        this.saveToLocalStorage(this.arrPosts);
+
+
+    }
   
 }
 

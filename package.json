@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "awaiting": "^3.0.0",
     "bootstrap": "^4.1.1",
     "circular-json": "^0.5.3",
     "express": "^4.16.3",

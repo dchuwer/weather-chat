@@ -19,7 +19,16 @@ class Controller {
 
     initApplication(){
 
-        //this.view.renderComments(controller.data.arrPosts);
+        /** Update the weather from the posts*/
+         if(this.data.arrPosts.length > 0)
+           var arrCities = this.data.arrPosts.map( a => a.city);
+           checkWeather(arrCities)
+            async function checkWeather(arrCities) {
+                var newarr =  arrCities.map( x => (controller.WeatherAPI.getWeather(x)))
+                var nArr = await Promise.all(newarr)
+                controller.data.updateWeather(nArr);
+            }
+            this.view.renderComments(this.data.arrPosts);
 
         /* Start a new City Post **/
         $('.searchButton').on('click', function(){  
