@@ -1,19 +1,8 @@
 /* Class to Manipulate All Datas */
 
 class Data {
-    constructor(city, temp_c, temp_f, id, weather, last_updated, icon, comment ){
-
-        this.city = city;
-        this.temp_c = temp_c;
-        this.temp_f = temp_f;
-        this.id = id;
-        this.weather = weather;
-        this.last_updated = last_updated;
-        this.icon = icon;
-        this.asc = false;
-        this.comment = [];
-        //this.arrPosts = this.getFromLocalStorage();
-
+    constructor(){
+        this.arrPosts = this.getFromLocalStorage();
     }
 
 
@@ -29,51 +18,27 @@ class Data {
 
     }
 
-    getWeather(){
-        
-        return $.ajax({
-            method: "GET",
-            url: 'http://api.apixu.com/v1/current.json?key=829b2ee50c3d4705a58122238180205&q='+this.city})
-     
-    }
-
-    createPost(data){
+    createPost(newpost){
              
-            console.log(this);
-            var id= Date.now();
-            this.city = data.location.name;
-            this.temp_c = data.current.temp_c;
-            this.temp_f = data.current.temp_f;
-            this.weather = data.current.condition.text;
-            this.id = id;
-            this.last_updated = data.current.last_updated;
-            this.icon = data.current.condition.icon;
-            var arrPosts = this.getFromLocalStorage();
-            arrPosts.push(this)
-            this.saveToLocalStorage(arrPosts);
-            
-       
+            this.arrPosts.push(newpost)
+            this.saveToLocalStorage(this.arrPosts);
     }
 
     addComment(inputComment,id){
-            var posts = this.getFromLocalStorage();
-            var index = this.findPostById(posts,id);
             
-            var comment1 = posts[index]
+            var index = this.findPostById(this.arrPosts,id);
+            var comment1 = this.arrPosts[index]
             var newObjComm = {text : inputComment};
             comment1.comment.push(newObjComm)
-            this.saveToLocalStorage(posts);
-            return posts;
-
+            this.saveToLocalStorage(this.arrPosts);
     }
 
     delPost(id){
 
-        var resmem = this.getFromLocalStorage();
-        let index = this.findPostById(resmem,id)
-        resmem.splice(index,1);
-        this.saveToLocalStorage(resmem);
-        return resmem;
+        let index = this.findPostById(this.arrPosts,id)
+        this.arrPosts.splice(index,1);
+        this.saveToLocalStorage(this.arrPosts);
+        
     }
 
     findPostById(posts, id){
@@ -84,12 +49,11 @@ class Data {
         }
     }
 
-    sortPosts(posts,typeSort){
+    sortPosts(typeSort){
 
-
-            var self=posts;
+            var self=this.arrPosts;
             self.asc=!self.asc;
-            return posts.sort(function (l, r) {
+            return this.arrPosts.sort(function (l, r) {
                 return l[typeSort] > r[typeSort] ? (self.asc ? 1 : -1) : l[typeSort] < r[typeSort] ? (self.asc ? -1 : 1) : 0;
             });
 

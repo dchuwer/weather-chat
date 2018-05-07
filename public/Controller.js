@@ -2,6 +2,9 @@
 
 import {Data} from './Data.js'
 import {View} from './View.js'
+import { WeatherAPI } from './WeatherAPI.js'
+import { City } from './City.js';
+
 
 /* Declaration Class Controller */
 class Controller {
@@ -9,23 +12,26 @@ class Controller {
 
         this.data = new Data();
         this.view = new View();
-
+        this.WeatherAPI = new WeatherAPI();
+        this.city = new City();
 
     }
 
     initApplication(){
 
+        this.view.renderComments(this.data.arrPosts);
+
         /* Start a new City Post **/
         $('.searchButton').on('click', function(){  
             
-            controller.data.city = $('#inputCity').val();  
+            var city = $('#inputCity').val();  
             $('#inputCity').val('')
             /* Search API using AJAX **/
-            var ajaxCall  = controller.data.getWeather();
+            var ajaxCall  = controller.WeatherAPI.getWeather(city);
 
-            ajaxCall.then(function (data) {
-                controller.data.createPost(data);
-                controller.view.render(controller.data);
+            ajaxCall.then(function (weatherObj) {
+                controller.data.createPost(weatherObj);
+                controller.view.render(weatherObj);
             })
            
            
@@ -44,8 +50,8 @@ class Controller {
             var inputComment = $(this).parent().find('#inputComment').val();
             $(this).parent().find('#inputComment').val('')
             var id = $(this).closest('.result').data().id
-            var posts = controller.data.addComment(inputComment,id)
-            controller.view.renderComments(posts);
+            controller.data.addComment(inputComment,id)
+            controller.view.renderComments(controller.data.arrPosts);
         
         
             
@@ -55,37 +61,28 @@ class Controller {
         $('.results').on('click','.trash', function(){
             var id = $(this).closest('.result').data().id        
             var delpost = controller.data.delPost(id);
-            controller.view.renderComments(delpost);
+            controller.view.renderComments(controller.data.arrPosts);
        
         });
 
         /* Sort By City */
         $('.container').on('click','#cityButton', function(){
-            var resmem = controller.data.getFromLocalStorage();
-            
-            controller.data.sortPosts(resmem,"city");
-            controller.data.saveToLocalStorage(resmem);
-            controller.view.renderComments(resmem);
+            controller.data.sortPosts("city");
+            controller.view.renderComments(controller.data.arrPosts);
        
         });
 
         /* Sort By Temperature */
         $('.container').on('click','#tempButton', function(){
-            var resmem = controller.data.getFromLocalStorage();
-            
-            controller.data.sortPosts(resmem,"temp_c");
-            controller.data.saveToLocalStorage(resmem);
-            controller.view.renderComments(resmem);
+            controller.data.sortPosts("temp_c");
+            controller.view.renderComments(controller.data.arrPosts);
        
         });
     
         /* Sort By Date */
         $('.container').on('click','#tempButton', function(){
-            var resmem = controller.data.getFromLocalStorage();
-            
-            controller.data.sortPosts(resmem,"last_updated");
-            controller.data.saveToLocalStorage(resmem);
-            controller.view.renderComments(resmem);
+            controller.data.sortPosts("last_updated");
+            controller.view.renderComments(controller.data.arrPosts);
        
         });
         
@@ -97,8 +94,6 @@ class Controller {
 
 
     var controller = new Controller();
-    var arrPosts = controller.data.getFromLocalStorage();
-    controller.view.renderComments(arrPosts)
     
     // $("input").keypress(function(event) {
     //     if (event.keyCode === 13) {
