@@ -2,7 +2,7 @@ import { City } from './City.js'
 
 class WeatherAPI{
 
-    constructor()    
+    constructor(){}
     
 
     getWeather(cityName){

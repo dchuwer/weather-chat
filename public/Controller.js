@@ -19,7 +19,7 @@ class Controller {
 
     initApplication(){
 
-        this.view.renderComments(this.data.arrPosts);
+        //this.view.renderComments(controller.data.arrPosts);
 
         /* Start a new City Post **/
         $('.searchButton').on('click', function(){  

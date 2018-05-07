@@ -1,7 +1,8 @@
 /* Class to Manipulate All Renders */
 
-class View {
-    constructor()
+class View{
+
+    constructor(){}
 
     render(post){
             $('.dropdown').css({display: "block"});
