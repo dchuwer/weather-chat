@@ -13,7 +13,7 @@ class Controller {
         this.data = new Data();
         this.view = new View();
         this.WeatherAPI = new WeatherAPI();
-        this.city = new City();
+        this.city = new City(); // No need to create acity here
 
     }
 
